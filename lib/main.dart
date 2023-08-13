@@ -4,37 +4,30 @@ void main() {
   runApp(new application());
 }
 
-class application extends StatefulWidget {
-  @override
-  _applicationState createState() => new _applicationState();
-}
-
-class _applicationState extends State<application> {
-  String text = "";
-  @override
-  void initState() {
-    text = 'Click On This Button';
-    super.initState();
-  }
-
-  void method() {
-    setState(() {
-      text = 'The text is changed';
-    });
-  }
-
+class application extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
-      title: 'Stateful Widget',
+      title: 'My Application',
       home: new Scaffold(
-        body: new Center(
-          child: new ElevatedButton(
-            onPressed: () {
-              method();
-            },
-            child: new Text(text),
-          ),
+        appBar: new AppBar(
+          title: new Text("List Widget"),
+        ),
+        body: new ListView(
+          children: [
+            new ListTile(
+              title: new Text('Item 1'),
+              trailing: new Icon(Icons.arrow_forward),
+            ),
+            new ListTile(
+              title: new Text('Item 2'),
+              trailing: new Icon(Icons.arrow_forward),
+            ),
+            new ListTile(
+              title: new Text('Item 3'),
+              trailing: new Icon(Icons.arrow_forward),
+            ),
+          ],
         ),
       ),
     );
