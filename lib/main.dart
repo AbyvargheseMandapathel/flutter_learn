@@ -5,24 +5,49 @@ void main() {
 }
 
 class Application extends StatelessWidget {
-  final List<int> items = List.generate(50, (index) => index + 1);
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      // Wrap with MaterialApp
       title: "New Test App",
       home: Scaffold(
         appBar: AppBar(
           title: Text("List Widget"),
         ),
-        body: ListView.builder(
-          itemCount: items.length,
-          itemBuilder: (BuildContext context, int index) {
-            return ListTile(
-              title: Text("item no: ${items[index]}"),
-              trailing: Icon(Icons.arrow_forward),
-            );
-          },
+        body: Stack(
+          alignment: Alignment.center,
+          children: [
+            Card(
+              color: Colors.yellow,
+              child: Padding(
+                padding: const EdgeInsets.all(100.0),
+              ),
+            ),
+            Card(
+              color: Colors.green,
+              child: Padding(
+                padding: const EdgeInsets.all(90.0),
+              ),
+            ),
+            Card(
+              color: Colors.amber,
+              child: Padding(
+                padding: const EdgeInsets.all(80.0),
+              ),
+            ),
+            Card(
+              color: Colors.blueAccent,
+              child: Padding(
+                padding: const EdgeInsets.all(70.0),
+              ),
+            ),
+            Card(
+              color: Colors.purple,
+              child: Padding(
+                padding: const EdgeInsets.all(60.0),
+              ),
+            ),
+          ],
         ),
       ),
     );
