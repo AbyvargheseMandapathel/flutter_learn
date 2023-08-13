@@ -4,17 +4,36 @@ void main() {
   runApp(new application());
 }
 
-class application extends StatelessWidget {
+class application extends StatefulWidget {
+  @override
+  _applicationState createState() => new _applicationState();
+}
+
+class _applicationState extends State<application> {
+  String text = "";
+  @override
+  void initState() {
+    text = 'Click On This Button';
+    super.initState();
+  }
+
+  void method() {
+    setState(() {
+      text = 'The text is changed';
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
-      title: 'Stateless Widget',
+      title: 'Stateful Widget',
       home: new Scaffold(
-        body: new Container(
-          color: Colors.lightBlue,
-          child: new Container(
-            color: Colors.green,
-            margin: const EdgeInsets.all(30.0),
+        body: new Center(
+          child: new ElevatedButton(
+            onPressed: () {
+              method();
+            },
+            child: new Text(text),
           ),
         ),
       ),
