@@ -1,33 +1,28 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(new application());
+  runApp(Application());
 }
 
-class application extends StatelessWidget {
+class Application extends StatelessWidget {
+  final List<int> items = List.generate(50, (index) => index + 1);
+
   @override
   Widget build(BuildContext context) {
-    return new MaterialApp(
-      title: 'My Application',
-      home: new Scaffold(
-        appBar: new AppBar(
-          title: new Text("List Widget"),
+    return MaterialApp(
+      title: "New Test App",
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text("List Widget"),
         ),
-        body: new ListView(
-          children: [
-            new ListTile(
-              title: new Text('Item 1'),
-              trailing: new Icon(Icons.arrow_forward),
-            ),
-            new ListTile(
-              title: new Text('Item 2'),
-              trailing: new Icon(Icons.arrow_forward),
-            ),
-            new ListTile(
-              title: new Text('Item 3'),
-              trailing: new Icon(Icons.arrow_forward),
-            ),
-          ],
+        body: ListView.builder(
+          itemCount: items.length,
+          itemBuilder: (BuildContext context, int index) {
+            return ListTile(
+              title: Text("item no: ${items[index]}"),
+              trailing: Icon(Icons.arrow_forward),
+            );
+          },
         ),
       ),
     );
