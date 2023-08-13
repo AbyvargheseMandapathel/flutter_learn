@@ -4,50 +4,49 @@ void main() {
   runApp(Application());
 }
 
-class Application extends StatelessWidget {
+class Application extends StatefulWidget {
+  @override
+  _ApplicationState createState() => _ApplicationState();
+}
+
+class _ApplicationState extends State<Application> {
+  List<int> _items = [];
+
+  @override
+  void initState() {
+    super.initState();
+    for (int i = 0; i < 50; i++) {
+      _items.add(i);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      // Wrap with MaterialApp
       title: "New Test App",
       home: Scaffold(
         appBar: AppBar(
-          title: Text("List Widget"),
+          title: Text("Grid"),
         ),
-        body: Stack(
-          alignment: Alignment.center,
-          children: [
-            Card(
-              color: Colors.yellow,
+        body: GridView.builder(
+          itemCount: _items.length,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 4,
+          ),
+          itemBuilder: (BuildContext context, int index) {
+            return Card(
+              color: Colors.blue,
               child: Padding(
-                padding: const EdgeInsets.all(100.0),
+                padding: const EdgeInsets.all(20.0),
+                child: Center(
+                  child: Text(
+                    _items[index].toString(),
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
               ),
-            ),
-            Card(
-              color: Colors.green,
-              child: Padding(
-                padding: const EdgeInsets.all(90.0),
-              ),
-            ),
-            Card(
-              color: Colors.amber,
-              child: Padding(
-                padding: const EdgeInsets.all(80.0),
-              ),
-            ),
-            Card(
-              color: Colors.blueAccent,
-              child: Padding(
-                padding: const EdgeInsets.all(70.0),
-              ),
-            ),
-            Card(
-              color: Colors.purple,
-              child: Padding(
-                padding: const EdgeInsets.all(60.0),
-              ),
-            ),
-          ],
+            );
+          },
         ),
       ),
     );
