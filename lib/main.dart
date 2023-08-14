@@ -50,14 +50,15 @@ class _ApplicationState extends State<Application>
             Center(child: Text("Settings")),
           ],
         ),
-        bottomNavigationBar: new Material(
-          color: Colors.blue,
-          child: TabBarView(
+        bottomNavigationBar: BottomAppBar(
+          // Use BottomAppBar
+          color: Theme.of(context).primaryColor, // Use the primary color
+          child: TabBar(
             controller: _tabController,
-            children: [
-              Center(child: Text("Welcome to Home")),
-              Center(child: Text("Welcome to User Account")),
-              Center(child: Text("Settings")),
+            tabs: [
+              Tab(icon: Icon(Icons.home)),
+              Tab(icon: Icon(Icons.supervisor_account)),
+              Tab(icon: Icon(Icons.settings)),
             ],
           ),
         ),
