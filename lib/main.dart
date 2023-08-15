@@ -11,56 +11,47 @@ class Application extends StatefulWidget {
   State<Application> createState() => _ApplicationState();
 }
 
-class _ApplicationState extends State<Application>
-    with SingleTickerProviderStateMixin {
-  late TabController _tabController; // Declare as 'late'
-
-  @override
-  void initState() {
-    super.initState();
-    _tabController = TabController(length: 3, vsync: this);
-  }
-
-  @override
-  void dispose() {
-    _tabController.dispose(); // Dispose the TabController
-    super.dispose();
-  }
+class _ApplicationState extends State<Application> {
+  // Declare variables to store text values for the TextFields
+  String textField1Text = '';
+  String textField2Text = '';
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text("Tabbar"),
-          bottom: TabBar(
-            controller: _tabController, // Provide the TabController here
-            tabs: [
-              Tab(icon: Icon(Icons.home)),
-              Tab(icon: Icon(Icons.supervisor_account)),
-              Tab(icon: Icon(Icons.settings)),
-            ],
-          ),
+          title: Text("Dummy Application"),
         ),
-        body: TabBarView(
-          controller: _tabController,
+        body: Column(
           children: [
-            Center(child: Text("Welcome to Home")),
-            Center(child: Text("Welcome to User Account")),
-            Center(child: Text("Settings")),
+            TextField(
+              // Store the value of the first TextField in textField1Text
+              onChanged: (String txt) {
+                setState(() {
+                  textField1Text = txt;
+                });
+              },
+              decoration: InputDecoration(
+                labelText: "Text Field 1",
+              ),
+            ),
+            TextField(
+              // Store the value of the second TextField in textField2Text
+              onSubmitted: (String txt) {
+                setState(() {
+                  textField2Text = txt;
+                });
+              },
+              decoration: InputDecoration(
+                hintText: "Tyoe Something",
+                labelText: "Text Field 2",
+              ),
+            ),
+            // Display the text values of the TextFields
+            Text("Text from TextField 1: $textField1Text"),
+            Text("Text from TextField 2: $textField2Text"),
           ],
-        ),
-        bottomNavigationBar: BottomAppBar(
-          // Use BottomAppBar
-          color: Theme.of(context).primaryColor, // Use the primary color
-          child: TabBar(
-            controller: _tabController,
-            tabs: [
-              Tab(icon: Icon(Icons.home)),
-              Tab(icon: Icon(Icons.supervisor_account)),
-              Tab(icon: Icon(Icons.settings)),
-            ],
-          ),
         ),
       ),
     );
