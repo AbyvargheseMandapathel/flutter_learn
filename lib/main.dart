@@ -12,9 +12,14 @@ class Application extends StatefulWidget {
 }
 
 class _ApplicationState extends State<Application> {
-  // Declare variables to store text values for the TextFields
-  String textField1Text = '';
-  String textField2Text = '';
+  String ptext = "";
+
+  // Declare method to update ptext
+  void method(String value) {
+    setState(() {
+      ptext = value;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,32 +30,20 @@ class _ApplicationState extends State<Application> {
         ),
         body: Column(
           children: [
-            TextField(
-              // Store the value of the first TextField in textField1Text
-              onChanged: (String txt) {
-                setState(() {
-                  textField1Text = txt;
-                });
+            ElevatedButton(
+              onPressed: () {
+                method("You Pressed ElevatedButton");
               },
-              decoration: InputDecoration(
-                labelText: "Text Field 1",
-              ),
+              child: Text("Elevated Button"),
             ),
-            TextField(
-              // Store the value of the second TextField in textField2Text
-              onSubmitted: (String txt) {
-                setState(() {
-                  textField2Text = txt;
-                });
+            TextButton(
+              onPressed: () {
+                method("You Pressed Text Button");
               },
-              decoration: InputDecoration(
-                hintText: "Tyoe Something",
-                labelText: "Text Field 2",
-              ),
+              child: Text("Text Button"),
             ),
-            // Display the text values of the TextFields
-            Text("Text from TextField 1: $textField1Text"),
-            Text("Text from TextField 2: $textField2Text"),
+            SizedBox(height: 20), // Added space between buttons and text
+            Text(ptext), // Display updated ptext here
           ],
         ),
       ),
