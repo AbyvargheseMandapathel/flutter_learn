@@ -12,14 +12,7 @@ class Application extends StatefulWidget {
 }
 
 class _ApplicationState extends State<Application> {
-  String ptext = "";
-
-  // Declare method to update ptext
-  void method(String value) {
-    setState(() {
-      ptext = value;
-    });
-  }
+  bool cbool = false;
 
   @override
   Widget build(BuildContext context) {
@@ -28,23 +21,19 @@ class _ApplicationState extends State<Application> {
         appBar: AppBar(
           title: Text("Dummy Application"),
         ),
-        body: Column(
-          children: [
-            ElevatedButton(
-              onPressed: () {
-                method("You Pressed ElevatedButton");
-              },
-              child: Text("Elevated Button"),
-            ),
-            TextButton(
-              onPressed: () {
-                method("You Pressed Text Button");
-              },
-              child: Text("Text Button"),
-            ),
-            SizedBox(height: 20), // Added space between buttons and text
-            Text(ptext), // Display updated ptext here
-          ],
+        body: Center(
+          child: Checkbox(
+            value: cbool, // Use the variable 'cbool' as the value
+            onChanged: (bool? cb) {
+              if (cb != null) {
+                // Make sure to handle the null value of cb
+                setState(() {
+                  cbool = cb;
+                  print(cbool);
+                });
+              }
+            },
+          ),
         ),
       ),
     );
