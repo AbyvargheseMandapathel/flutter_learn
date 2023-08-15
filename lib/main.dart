@@ -12,13 +12,7 @@ class Application extends StatefulWidget {
 }
 
 class _ApplicationState extends State<Application> {
-  double dtext = 2.0;
-
-  void method1(double value) {
-    setState(() {
-      dtext = value;
-    });
-  }
+  bool sbool = false;
 
   @override
   Widget build(BuildContext context) {
@@ -28,20 +22,14 @@ class _ApplicationState extends State<Application> {
           title: Text("Dummy Application"),
         ),
         body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Slider(
-                value: dtext,
-                min: 1.0,
-                max: 10.0,
-                onChanged: (double dval) {
-                  method1(dval);
-                },
-              ),
-              Text("This is the value: $dtext"),
-            ],
-          ),
+          child: new Switch(
+              value: sbool,
+              onChanged: (bool sb) {
+                setState(() {
+                  sbool = sb;
+                  print(sbool);
+                });
+              }),
         ),
       ),
     );
