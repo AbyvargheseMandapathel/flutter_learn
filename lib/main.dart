@@ -1,63 +1,73 @@
 import 'package:flutter/material.dart';
+import 'otherpage.dart';
 
 void main() {
   runApp(Application());
 }
 
-class Application extends StatefulWidget {
-  const Application({Key? key}) : super(key: key);
-
-  @override
-  State<Application> createState() => _ApplicationState();
-}
-
-class _ApplicationState extends State<Application> {
-  bool sbool = false;
-
+class Application extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text("Dummy Application"),
-        ),
-        drawer: Drawer(
-          child: ListView(
-            children: [
-              UserAccountsDrawerHeader(
-                accountName: new Text("Aby Varghese"),
-                accountEmail: new Text("test@gmail.com"),
-                currentAccountPicture: new CircleAvatar(
+      home: ApplicationState(),
+      routes: {
+        '/page1': (context) => op("page 1"),
+        '/page2': (context) => op("page 2"),
+      },
+    );
+  }
+}
+
+class ApplicationState extends StatefulWidget {
+  @override
+  _ApplicationStateState createState() => _ApplicationStateState();
+}
+
+class _ApplicationStateState extends State<ApplicationState> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Dummy Application"),
+      ),
+      drawer: Drawer(
+        child: ListView(
+          children: [
+            UserAccountsDrawerHeader(
+              accountName: Text("Aby Varghese"),
+              accountEmail: Text("test@gmail.com"),
+              currentAccountPicture: CircleAvatar(
+                backgroundColor: Colors.black26,
+                child: Text("A"),
+              ),
+              decoration: BoxDecoration(color: Colors.orange),
+              otherAccountsPictures: [
+                CircleAvatar(
                   backgroundColor: Colors.black26,
-                  child: new Text("A"),
+                  child: Text('a'),
                 ),
-                decoration: new BoxDecoration(color: Colors.orange),
-                otherAccountsPictures: [
-                  new CircleAvatar(
-                    backgroundColor: Colors.black26,
-                    child: new Text('a'),
-                  ),
-                  new CircleAvatar(
-                    backgroundColor: Colors.black26,
-                    child: new Text('b'),
-                  ),
-                ],
-              ),
-              ListTile(
-                title: Text("page 1"),
-                trailing: Icon(Icons.arrow_forward),
-              ),
-              ListTile(
-                title: Text("page 2"),
-                trailing: Icon(Icons.arrow_forward),
-              ),
-              ListTile(
-                title: Text("Close"),
-                trailing: Icon(Icons.close),
-                onTap: () => Navigator.pop(context),
-              ),
-            ],
-          ),
+                CircleAvatar(
+                  backgroundColor: Colors.black26,
+                  child: Text('b'),
+                ),
+              ],
+            ),
+            ListTile(
+              title: Text("page 1"),
+              trailing: Icon(Icons.arrow_forward),
+              onTap: () => Navigator.of(context).pushNamed('/page1'),
+            ),
+            ListTile(
+              title: Text("page 2"),
+              trailing: Icon(Icons.arrow_forward),
+              onTap: () => Navigator.of(context).pushNamed('/page2'),
+            ),
+            ListTile(
+              title: Text("Close"),
+              trailing: Icon(Icons.close),
+              onTap: () => Navigator.pop(context),
+            ),
+          ],
         ),
       ),
     );
