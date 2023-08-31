@@ -21,15 +21,43 @@ class _ApplicationState extends State<Application> {
         appBar: AppBar(
           title: Text("Dummy Application"),
         ),
-        body: Center(
-          child: new Switch(
-              value: sbool,
-              onChanged: (bool sb) {
-                setState(() {
-                  sbool = sb;
-                  print(sbool);
-                });
-              }),
+        drawer: Drawer(
+          child: ListView(
+            children: [
+              UserAccountsDrawerHeader(
+                accountName: new Text("Aby Varghese"),
+                accountEmail: new Text("test@gmail.com"),
+                currentAccountPicture: new CircleAvatar(
+                  backgroundColor: Colors.black26,
+                  child: new Text("A"),
+                ),
+                decoration: new BoxDecoration(color: Colors.orange),
+                otherAccountsPictures: [
+                  new CircleAvatar(
+                    backgroundColor: Colors.black26,
+                    child: new Text('a'),
+                  ),
+                  new CircleAvatar(
+                    backgroundColor: Colors.black26,
+                    child: new Text('b'),
+                  ),
+                ],
+              ),
+              ListTile(
+                title: Text("page 1"),
+                trailing: Icon(Icons.arrow_forward),
+              ),
+              ListTile(
+                title: Text("page 2"),
+                trailing: Icon(Icons.arrow_forward),
+              ),
+              ListTile(
+                title: Text("Close"),
+                trailing: Icon(Icons.close),
+                onTap: () => Navigator.pop(context),
+              ),
+            ],
+          ),
         ),
       ),
     );
